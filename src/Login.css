@@ -1,0 +1,568 @@
+/* Import Font */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap');
+
+/* --- CSS VARIABLES & THEME --- */
+:root {
+    --primary: #091226; 
+    --primary-dark: #0f172a; 
+    --secondary: #4d65b5; 
+    --bg-gradient: linear-gradient(135deg, #0f172a 0%, #2e407e 100%);
+    --white: #ffffff;
+    --gray-light: #f3f4f6;
+    --gray: #9ca3af;
+    --text: #1f2937;
+    --text-light: #6b7280;
+    --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* --- RESET & BASE --- */
+* { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
+}
+
+.lp-login-page {
+    background: var(--bg-gradient);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+
+@keyframes float {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(30px, 50px); }
+}
+
+/* --- MAIN CONTAINER --- */
+.lp-container {
+    background: var(--white);
+    border-radius: 100px;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+    width: 900px;
+    max-width: 100%;
+    min-height: 600px;
+    display: flex;
+    border: 5px solid white;
+    z-index: 1;
+}
+
+/* --- FORM CONTAINERS --- */
+.lp-form-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 50px;
+    text-align: center;
+    background: var(--white);
+    z-index: 1;
+}
+
+/* Sign In (Default Left) */
+.lp-sign-in-container {
+    left: 0;
+    z-index: 2;
+}
+
+/* Sign Up (Default Hidden Left) */
+.lp-sign-up-container {
+    left: 0;
+    opacity: 0;
+    z-index: 1;
+}
+
+/* --- ANIMATION STATES --- */
+/* When Active (Show Register) */
+.lp-container.lp-right-panel-active .lp-sign-in-container { 
+    transform: translateX(100%); 
+    opacity: 0;
+    z-index: 1;
+}
+
+.lp-container.lp-right-panel-active .lp-sign-up-container { 
+    transform: translateX(100%); 
+    opacity: 1; 
+    z-index: 5; 
+    animation: show 0.6s;
+}
+
+@keyframes show {
+    0%, 49.99% { opacity: 0; z-index: 1; }
+    50%, 100% { opacity: 1; z-index: 5; }
+}
+
+/* --- TYPOGRAPHY & INPUTS --- */
+.lp-container h1 { 
+    font-size: 2rem;
+    font-weight: 700; 
+    margin-bottom: 10px; 
+    color: var(--text); 
+}
+
+.lp-subtitle {
+    font-size: 14px;
+    color: var(--text-light);
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.lp-input-group {
+    position: relative;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.lp-input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gray);
+    transition: color 0.3s;
+    font-size: 1rem;
+    z-index: 2;
+}
+
+.lp-input-group input {
+    background-color: var(--gray-light);
+    border: 2px solid transparent;
+    padding: 14px 15px 14px 45px; /* Left padding for icon */
+    width: 100%;
+    border-radius: 12px;
+    outline: none;
+    font-size: 14px;
+    color: var(--text);
+    transition: all 0.3s ease;
+}
+
+.lp-input-group input:focus {
+    background-color: var(--white);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+.lp-input-group input:focus + .lp-input-icon,
+.lp-input-group:focus-within .lp-input-icon {
+    color: var(--primary);
+}
+
+/* --- BUTTONS --- */
+.lp-btns {
+    border-radius: 50px;
+    border: none;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 14px 50px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.lp-btns:hover { 
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+}
+
+.lp-btns:active { transform: scale(0.95); }
+
+.lp-btns.lp-ghost { 
+    background: transparent; 
+    border: 2px solid var(--white);
+    box-shadow: none;
+}
+
+.lp-btns.lp-ghost:hover {
+    background: var(--white);
+    color: var(--primary);
+}
+
+/* --- OVERLAY (SIDE PANEL) --- */
+.lp-overlay-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: var(--transition);
+    z-index: 100;
+}
+
+.lp-container.lp-right-panel-active .lp-overlay-container { 
+    transform: translateX(-100%); 
+}
+
+.lp-overlay {
+    background: var(--bg-gradient);
+    color: var(--white);
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateX(0);
+    transition: var(--transition);
+    display: flex;
+}
+
+.lp-container.lp-right-panel-active .lp-overlay { 
+    transform: translateX(50%); 
+}
+
+.lp-overlay-panel {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 50px;
+    text-align: center;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    transform: translateX(0);
+    transition: var(--transition);
+}
+
+.lp-overlay-left { 
+    transform: translateX(-20%); 
+}
+.lp-container.lp-right-panel-active .lp-overlay-left { 
+    transform: translateX(0); 
+}
+
+.lp-overlay-right { 
+    right: 0; 
+    transform: translateX(0); 
+}
+.lp-container.lp-right-panel-active .lp-overlay-right { 
+    transform: translateX(20%); 
+}
+
+.lp-overlay-panel h1 { color: var(--white); }
+.lp-overlay-panel p { 
+    font-size: 16px; 
+    line-height: 1.6; 
+    margin: 20px 0 30px;
+    opacity: 0.9;
+}
+
+/* --- FORGOT PASSWORD LINK --- */
+.lp-forgot-pass-link {
+    color: var(--text-light);
+    font-size: 13px;
+    text-decoration: none;
+    margin: 15px 0;
+    cursor: pointer;
+    transition: color 0.3s;
+    display: inline-block;
+}
+
+.lp-forgot-pass-link:hover { 
+    color: var(--primary); 
+    text-decoration: underline; 
+}
+
+/* --- MODAL STYLES --- */
+.lp-modal-overlay {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0; top: 0; 
+    width: 100%; height: 100%; 
+    background-color: rgba(0,0,0,0.6); 
+    backdrop-filter: blur(5px);
+    justify-content: center; 
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.lp-modal-overlay.lp-active {
+    display: flex;
+    opacity: 1;
+}
+
+.lp-modal-content {
+    background-color: white;
+    padding: 40px;
+    border-radius: 20px;
+    width: 450px;
+    max-width: 90%;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+    animation: modalPop 0.3s forwards;
+}
+
+@keyframes modalPop {
+    to { transform: scale(1); }
+}
+
+.lp-close-modal { 
+    position: absolute; 
+    top: 20px; 
+    right: 25px; 
+    font-size: 24px; 
+    cursor: pointer; 
+    color: var(--gray);
+    transition: color 0.3s;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.lp-close-modal:hover { 
+    color: var(--text);
+    background-color: var(--gray-light);
+}
+
+/* Modal Steps */
+.lp-step { 
+    display: none; 
+    animation: fadeIn 0.5s;
+}
+.lp-step.lp-active { display: block; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.lp-step h2 {
+    color: var(--text);
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.lp-step p {
+    color: var(--text-light);
+    margin-bottom: 25px;
+    font-size: 14px;
+}
+
+.lp-otp-inputs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.lp-otp-input {
+    width: 50px;
+    height: 60px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text);
+    transition: all 0.3s;
+    padding: 0;
+}
+
+.lp-otp-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+    outline: none;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .lp-container {
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+        flex-direction: column;
+    }
+    
+    .lp-form-container {
+        width: 100%;
+        position: relative;
+        height: 50%;
+        padding: 0 30px;
+    }
+    
+    .lp-sign-up-container {
+        display: none;
+    }
+    
+    .lp-overlay-container {
+        display: none;
+    }
+}
+
+/* --- NOTIFICATION STYLES --- */
+.lp-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    border-radius: 12px;
+    color: white;
+    font-weight: 600;
+    z-index: 9999;
+    animation: slideIn 0.3s ease;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.lp-notification.lp-success {
+    background: linear-gradient(45deg, #10b981, #059669);
+}
+
+.lp-notification.lp-error {
+    background: linear-gradient(45deg, #ef4444, #dc2626);
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.lp-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+
+/* ================================================================
+   CSS — Add these styles to your Login.css
+   ================================================================ */
+ 
+
+.lp-mode-toggle {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(12px);
+  border-radius: 50px;
+  padding: 6px;
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+ 
+.lp-mode-btn {
+  display: flex;
+  align-items: center;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 50px;
+  background: transparent;
+  color: rgba(255,255,255,0.7);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: inherit;
+}
+ 
+.lp-mode-btn.active {
+  background: #fff;
+  color: #6c63ff;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+}
+ 
+.lp-mode-btn:hover:not(.active) {
+  color: #fff;
+  background: rgba(255,255,255,0.2);
+}
+ 
+.lp-staff-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+ 
+.lp-staff-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 50px 44px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  text-align: center;
+}
+ 
+.lp-staff-header {
+  margin-bottom: 32px;
+}
+ 
+.lp-staff-icon {
+  font-size: 48px;
+  color: #6c63ff;
+  margin-bottom: 16px;
+}
+ 
+.lp-staff-card h1 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 8px;
+}
+ 
+.lp-staff-btn {
+  width: 100%;
+  margin-top: 8px;
+  background: linear-gradient(135deg, #6c63ff 0%, #5a52d5 100%);
+}
+ 
+.lp-staff-btn:hover {
+  background: linear-gradient(135deg, #5a52d5 0%, #4a42c5 100%);
+}
+ 
+.lp-staff-note {
+  margin-top: 20px;
+  font-size: 13px;
+  color: #999;
+}
+ 
+.staffs-hint {
+  display: block;
+  font-size: 12px;
+  color: var(--text-secondary, #888);
+  margin-top: 6px;
+}

@@ -1,0 +1,356 @@
+/* ========================================
+   CSS VARIABLES
+======================================== */
+:root {
+  --bg:           #f0f4fb;
+  --white:        #ffffff;
+  --ink:          #0d1b2e;
+  --ink-2:        #1a2e47;
+  --ink-3:        #2e4a6b;
+  --slate:        #5a7a9e;
+  --slate-light:  #8fadc8;
+  --fog:          #d4e0f0;
+  --fog-light:    #eaf1fa;
+  --azure:        #2563eb;
+  --azure-light:  #dbeafe;
+  --azure-deep:   #1e3a8a;
+  --cyan-light:   #cffafe;
+  --cyan-deep:    #164e63;
+  --violet:       #7c3aed;
+  --violet-light: #ede9fe;
+  --teal:         #0d9488;
+  --teal-light:   #ccfbf1;
+  --teal-deep:    #134e4a;
+  --rose:         #e11d48;
+  --rose-light:   #ffe4e6;
+  --amber:        #d97706;
+  --amber-light:  #fef3c7;
+
+  --primary:        #6366f1;
+  --sidebar-width:  90px;
+  --border-radius:  1.25rem;
+  --transition:     all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --bg-body:        #f8fafc;
+  --panel-bg:       #ffffff;
+  --border-color:   #e2e8f0;
+  --text-main:      #0f172a;
+  --text-secondary: #64748b;
+  --card-shadow:    rgba(0, 0, 0, 0.05);
+  --table-hover:    #f8fafc;
+  --logo-bg:        #0f172a;
+  --nav-active-bg:  #0f172a;
+  --radius-md:      12px;
+  --shadow-sm:      0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+/* ========================================
+   SIDEBAR — DESKTOP DEFAULT
+======================================== */
+.side-nav-container {
+  width: var(--sidebar-width);
+  min-height: 100vh;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  border-right: 1px solid var(--border-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  padding: 24px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.side-nav-container .container-fluid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+/* ========================================
+   LOGO — shared styles
+======================================== */
+.side-nav-logo {
+  width: 52px;
+  height: 52px;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border-radius: var(--radius-md);
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  color: white !important;
+  font-weight: 800;
+  font-size: 18px;
+  text-decoration: none;
+  padding: 0 !important;
+  box-shadow: 0 10px 20px -5px rgba(15, 23, 42, 0.3);
+  transition: var(--transition);
+  letter-spacing: 0.5px;
+  user-select: none;
+}
+
+.side-nav-logo:hover {
+  color: white !important;
+  transform: scale(1.05);
+  box-shadow: 0 14px 24px -6px rgba(15, 23, 42, 0.4);
+}
+
+/* Desktop logo: visible, sits above nav items */
+.desktop-logo {
+  display: flex !important;
+  margin-bottom: 40px;
+}
+
+/* Mobile header: hidden on desktop */
+.mobile-header {
+  display: none;
+}
+
+/* ========================================
+   NAV GROUP
+======================================== */
+.side-nav-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ========================================
+   NAV ITEMS
+======================================== */
+.side-nav-item {
+  width: 50px;
+  height: 50px;
+  border-radius: 16px;
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary) !important;
+  text-decoration: none;
+  position: relative;
+  transition: var(--transition);
+  padding: 0 !important;
+}
+
+/* Active indicator bar */
+.side-nav-item::before {
+  content: '';
+  position: absolute;
+  left: -13px;
+  width: 4px;
+  height: 0;
+  background: var(--text-main);
+  border-radius: 0 4px 4px 0;
+  transition: height 0.3s ease;
+}
+
+.side-nav-item:hover {
+  background: #f1f5f9;
+  color: var(--text-main) !important;
+  transform: scale(1.05);
+}
+
+.side-nav-item.active {
+  background: var(--text-main);
+  color: white !important;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.3);
+}
+
+.side-nav-item.active::before {
+  height: 24px;
+}
+
+.side-nav-item i {
+  font-size: 18px;
+  margin-bottom: 4px;
+  transition: var(--transition);
+}
+
+.side-nav-item span {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ========================================
+   MOBILE  (max-width: 991px)
+======================================== */
+@media (max-width: 991px) {
+
+  
+  .desktop-logo { display: none !important; }
+
+  .side-nav-container {
+    width: 100%;
+    min-height: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 0;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+    background: #ffffff;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  .side-nav-container .container-fluid {
+    flex-direction: column;
+    padding: 0;
+    width: 100%;
+  }
+
+  /* Show mobile header */
+  .mobile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 12px 16px;
+  }
+
+  /* Smaller logo on mobile */
+  .mobile-header .side-nav-logo {
+    width: 40px;
+    height: 40px;
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+
+  /* Hamburger toggle */
+  .mobile-toggle {
+    border: none !important;
+    padding: 8px 12px !important;
+    border-radius: 8px;
+    color: var(--text-main) !important;
+    font-size: 20px;
+    transition: var(--transition);
+  }
+
+  .mobile-toggle:focus,
+  .mobile-toggle:hover {
+    box-shadow: none !important;
+    background: #f1f5f9;
+  }
+
+  /* Collapse animation */
+  .navbar-collapse {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+  }
+
+  .navbar-collapse.show {
+    max-height: 400px;
+    border-top: 1px solid var(--border-color);
+  }
+
+  /* Mobile nav group */
+  .side-nav-group {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 16px;
+    gap: 12px;
+  }
+
+  /* Mobile nav items */
+  .side-nav-item {
+    width: auto;
+    height: auto;
+    padding: 12px 20px !important;
+    flex-direction: row;
+    gap: 10px;
+    border-radius: 50px;
+    background: #f8fafc;
+  }
+
+  .side-nav-item::before { display: none; }
+
+  .side-nav-item:hover {
+    background: #e2e8f0;
+    transform: translateY(-2px);
+  }
+
+  .side-nav-item.active {
+    background: var(--text-main);
+    color: white !important;
+  }
+
+  .side-nav-item span {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .side-nav-item i {
+    margin-bottom: 0;
+    font-size: 16px;
+  }
+
+  body { padding-top: 65px; }
+}
+
+/* ========================================
+   TABLET  (768px – 991px)
+======================================== */
+@media (min-width: 768px) and (max-width: 991px) {
+  .side-nav-group { justify-content: center; gap: 16px; }
+  .side-nav-item { padding: 14px 28px !important; }
+  .side-nav-item span { font-size: 14px; }
+}
+
+/* ========================================
+   SMALL MOBILE  (max-width: 480px)
+======================================== */
+@media (max-width: 480px) {
+  .side-nav-group { gap: 8px; padding: 12px; }
+  .side-nav-item  { padding: 10px 16px !important; gap: 6px; }
+  .side-nav-item span { font-size: 12px; }
+  .side-nav-item i    { font-size: 14px; }
+}
+
+/* ========================================
+   LARGE SCREENS  (min-width: 1400px)
+======================================== */
+@media (min-width: 1400px) {
+  :root { --sidebar-width: 100px; }
+
+  .side-nav-item { width: 72px; height: 72px; }
+  .side-nav-item i    { font-size: 20px; }
+  .side-nav-item span { font-size: 10px; }
+}
+
+
+
+/* ── Add this block at the bottom of your SideNav.css ── */
+
+/* Logout button — matches side-nav-item style exactly */
+.side-nav-logout {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-top: auto;   /* pushes it to the bottom on desktop */
+  color: var(--rose, #e11d48) !important;
+}
+
+.side-nav-logout:hover {
+  background: #fff1f2 !important;
+  color: var(--rose, #e11d48) !important;
+  transform: scale(1.05);
+}
+
+/* Desktop: push logout to the bottom of the sidebar */
+@media (min-width: 992px) {
+  .side-nav-group {
+    flex: 1;
+  }
+  .side-nav-logout {
+    margin-top: 24px;
+  }
+}
